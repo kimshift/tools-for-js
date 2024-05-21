@@ -7,10 +7,10 @@ if git status --porcelain | grep -q '^[ MARC]'; then # 判断仓库是否干净
 fi
 
 # 补丁修改---修改小版本
-# npm version patch
+npm version patch
 
 # 新增功能---修改中版本
-npm version minor
+# npm version minor
 
 # 重大修改---修改大版本
 # npm version major

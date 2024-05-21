@@ -10,7 +10,7 @@ export { numToChinese, moneyFormat, textTransform, convertSmallHump } from './ut
 export { timeStamp, countDown, dateFormat, getTimeDistance } from './utils/time'
 
 // 数组类
-export { deWeightArray } from './utils/array'
+export { deWeightArray, treeLastChildSum } from './utils/array'
 
 // 计算类
 export { exactAdd, summation, countNumber } from './utils/calculate'
