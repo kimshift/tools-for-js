@@ -4,13 +4,20 @@
  */
 
 // 转换类
-export { numToChinese, moneyFormat, textTransform, convertSmallHump } from './utils/transform'
+export {
+  numToChinese,
+  moneyFormat,
+  textTransform,
+  convertSmallHump,
+  lowercaseKeys,
+  upperCaseKeys,
+} from './utils/transform'
 
 // 时间类
 export { timeStamp, countDown, dateFormat, getTimeDistance } from './utils/time'
 
 // 数组类
-export { deWeightArray, treeLastChildSum } from './utils/array'
+export { deWeightArray, treeLastChildSum, checkKeyEmpty } from './utils/array'
 
 // 计算类
 export { exactAdd, summation, countNumber } from './utils/calculate'

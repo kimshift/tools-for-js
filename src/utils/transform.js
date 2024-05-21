@@ -159,3 +159,37 @@ export const textTransform = params => {
 export const convertSmallHump = key => {
   return key.toLowerCase().replace(/_(\w)/g, (all, letter) => letter.toUpperCase())
 }
+
+/*******
+ * @description: 将对象中的键转小写
+ * @author: 琴时
+ * @param {Object} obj
+ * @return {Object}
+ */
+export const lowercaseKeys = obj => {
+  const result = {}
+  for (const key in obj) {
+    if (Object.hasOwnProperty.call(obj, key)) {
+      const lowercaseKey = key.toLowerCase()
+      result[lowercaseKey] = obj[key]
+    }
+  }
+  return result
+}
+
+/*******
+ * @description: 将对象中的键转大写
+ * @author: 琴时
+ * @param {Object} obj
+ * @return {Object}
+ */
+export const upperCaseKeys = obj => {
+  const result = {}
+  for (const key in obj) {
+    if (Object.hasOwnProperty.call(obj, key)) {
+      const lowercaseKey = key.toUpperCase()
+      result[lowercaseKey] = obj[key]
+    }
+  }
+  return result
+}

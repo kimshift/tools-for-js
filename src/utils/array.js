@@ -1,4 +1,5 @@
 import { summation } from './calculate'
+import { isEmpty } from './common'
 /*******
  * @description: 数组去重
  * @author: 琴时
@@ -54,4 +55,31 @@ export const treeLastChildSum = (tree, config) => {
   }
   traverseTree(tree, sumList, key, children)
   return summation(sumList)
+}
+
+/*******
+ * @description: 校验数组对象中是否存在指定的字段为空
+ * @author: 琴时
+ * @param {Array} list    [校验的数组对象]
+ * @param {Array} keyList [校验指定的字段-数组形式]
+ * @return {Array} 返回存在空的字段数组
+ * @example: checkKeyEmpty(tree, ['id', 'name'])
+ */
+export const checkKeyEmpty = (list, keyList) => {
+  const temp = []
+  const loops = (array, key) => {
+    array.some(item => {
+      if (isEmpty(item[key])) {
+        // 存在空的字段
+        temp.push(key)
+        return true
+      } else if (item.children && item.children.length > 0) {
+        loops(item.children, key)
+      }
+    })
+  }
+  keyList.forEach(key => {
+    loops(list, key)
+  })
+  return temp
 }
