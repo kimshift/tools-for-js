@@ -4,9 +4,16 @@
  */
 
 // 转换类
-export { numToChinese, moneyFormat, textTransform } from './utils/transform'
+export { numToChinese, moneyFormat, textTransform, convertSmallHump } from './utils/transform'
 
 // 时间类
 export { timeStamp, countDown, dateFormat, getTimeDistance } from './utils/time'
 
-export { IsType, deepCopy, isEmpty, isEqual, deWeightArray, createUUID } from './utils/common'
+// 数组类
+export { deWeightArray } from './utils/array'
+
+// 计算类
+export { exactAdd, summation, countNumber } from './utils/calculate'
+
+// 其他类
+export { IsType, deepCopy, isEmpty, isEqual, createUUID } from './utils/common'

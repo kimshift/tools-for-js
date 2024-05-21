@@ -112,36 +112,6 @@ export const isEqual = (a, b) => {
 }
 
 /*******
- * @description: 数组去重
- * @author: 琴时
- * @param {Array} list [需要去重的数组对象]
- * @param {String} key [指定数组对象元素主键]
- * 以该主键的值为标准判断数据是否重复|如果数组元素是一般数据类型,key传空即可
- * @param {Function} callback [回调函数,用于处理去重后重复的数据(可不传)]
- * @return {Array} 去重后的新数组对象
- */
-export const deWeightArray = (list, key, callback) => {
-  /* 如果数组的元素是基本数据类型那就不传第二个参数 */
-  if (!key) {
-    const set = new Set(list)
-    return [...set]
-  }
-  const tempList = [] //重复数据
-  const map = new Map() //创建Map对象数据结构
-  // 遍历需要去重的数组对象
-  list.forEach(item => {
-    // 判断map对象中该key是否已经存在
-    if (!map.has(item[key])) {
-      map.set(item[key], item) //如果不存在，将该数据插入
-    } else {
-      tempList.push(item)
-    }
-  })
-  IsType('Function', callback) && callback(tempList)
-  return [...map.values()] //将map对象转换回数组再返回
-}
-
-/*******
  * @description: 生成UUID
  * UUID(Universally Unique IDentifier) 全局唯一标识符。
  * UUID是一种由算法生成的二进制长度为128位的数字标识符。

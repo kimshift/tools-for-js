@@ -148,3 +148,14 @@ export const textTransform = params => {
   })
   return arrayTemp
 }
+
+/*******
+ * @description: 变量名下划线转小驼峰
+ * @author: 琴时
+ * @param {String} key
+ * @return {String}
+ * @example: convertSmallHump('user_name') => userName
+ */
+export const convertSmallHump = key => {
+  return key.toLowerCase().replace(/_(\w)/g, (all, letter) => letter.toUpperCase())
+}

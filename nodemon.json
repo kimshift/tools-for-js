@@ -1,0 +1,11 @@
+{
+    "watch": [
+        "src"
+    ],
+    "ext": "ts,js",
+    "ignore": [
+        "lib/**/*.js",
+        "node_modules"
+    ],
+    "exec": "babel-node src/index.js"
+}
