@@ -1,0 +1,32 @@
+{
+  "name": "tools-for-js",
+  "version": "0.0.2",
+  "description": "基于babel构建的javascript工具库",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "sh build/build.sh",
+    "release": "sh build/release.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimshift/tools-for-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kimshift/tools-for-js/issues"
+  },
+  "keywords": [
+    "JavaScript",
+    "tools"
+  ],
+  "author": "kimshift",
+  "license": "ISC",
+  "files": [
+    "README.md",
+    "lib/"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.24.5",
+    "@babel/core": "^7.24.5",
+    "@babel/preset-env": "^7.24.5"
+  }
+}
