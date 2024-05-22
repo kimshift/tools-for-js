@@ -1,5 +1,5 @@
 import { summation } from './calculate'
-import { isEmpty } from './common'
+import { isEmpty, deepCopy } from './common'
 /*******
  * @description: 数组去重
  * @author: 琴时
@@ -82,4 +82,100 @@ export const checkKeyEmpty = (list, keyList) => {
     loops(list, key)
   })
   return temp
+}
+
+/*******
+ * @description: 移动数组元素
+ * @author: 琴时
+ * @param {Array} list
+ * @param {Number} from [移动的位置]
+ * @param {Number} to   [目标位置]
+ * @return {Array}
+ */
+export const arrEleMove = (list, from, to) => {
+  list = list.slice()
+  list.splice(to < 0 ? list.length + to : to, 0, list.splice(from, 1)[0])
+  return list
+}
+
+/*******
+ * @description: 数组元素交换位置
+ * @author: 琴时
+ * @param {Array} list
+ * @param {Number} i1
+ * @param {Number} i2
+ * @return {Array}
+ */
+export const arrExchange = (list, i1, i2) => {
+  list = list.slice()
+  const item = list[i1]
+  list[i1] = list[i2]
+  list[i2] = item
+  return list
+}
+
+/*******
+ * @description: 数组格式转树状结构
+ * @author: 琴时
+ * @param {Array} array
+ * @param {Object} config
+ * @param {String} config.id        [主键名]
+ * @param {String} config.pid       [父级主键名]
+ * @param {String} config.children  [子级数组名]
+ * @return {Array}                  [树状结构数组]
+ */
+export const arrayToTree = (array, config) => {
+  const { id = 'id', pid = 'pid', children = 'children' } = config || {}
+  let data = deepCopy(array)
+  let result = []
+  let hash = {}
+  data.forEach((_, index) => {
+    hash[data[index][id]] = data[index]
+  })
+
+  data.forEach(item => {
+    let hashVP = hash[item[pid]]
+    if (hashVP) {
+      !hashVP[children] && (hashVP[children] = [])
+      hashVP[children].push(item)
+    } else {
+      result.push(item)
+    }
+  })
+  return result
+}
+
+/*******
+ * @description: 根据label的值获取value
+ * @author: 琴时
+ * @param {Array} list
+ * @param {String} labelVal [label的值]
+ * @return {*}
+ */
+export const getValueFromArray = (list, labelVal, label = 'label', value = 'value') => {
+  list = JSON.parse(JSON.stringify(list))
+  let res = list.find(item => item[label] == labelVal) || {}
+  return res[value]
+}
+
+/*******
+ * @description: 随机抽取数组中的n个值
+ * @author: 琴时
+ * @param {Array} array
+ * @param {Number} num
+ * @return {Array}
+ */
+export const randomNumEnum = (array, num) => {
+  let shuffled = array.slice(0),
+    i = array.length,
+    min = i - num,
+    temp,
+    index
+  while (i-- > min) {
+    index = Math.floor((i + 1) * Math.random())
+    temp = shuffled[index]
+    shuffled[index] = shuffled[i]
+    shuffled[i] = temp
+  }
+  return shuffled.slice(min)
 }

@@ -14,13 +14,24 @@ export {
 } from './utils/transform'
 
 // 时间类
-export { timeStamp, countDown, dateFormat, getTimeDistance } from './utils/time'
+export { timeStamp, countDown, dateFormat, getTimeDistance, transformDate } from './utils/time'
 
 // 数组类
-export { deWeightArray, treeLastChildSum, checkKeyEmpty } from './utils/array'
+export {
+  deWeightArray,
+  treeLastChildSum,
+  checkKeyEmpty,
+  arrEleMove,
+  arrExchange,
+  arrayToTree,
+  getValueFromArray,
+} from './utils/array'
 
 // 计算类
 export { exactAdd, summation, countNumber } from './utils/calculate'
 
 // 其他类
 export { IsType, deepCopy, isEmpty, isEqual, createUUID } from './utils/common'
+
+// 字符类
+export { getStrLength, checkPwdStrength, splitString } from './utils/string'

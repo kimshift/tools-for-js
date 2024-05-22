@@ -159,3 +159,29 @@ export const countDown = (params, sign = 'cn') => {
   }
   return result[sign]
 }
+
+/*******
+ * @description: 距离当前时间状况
+ * @author: 琴时
+ * @param {*} date
+ * @return {String}
+ */
+export const transformDate = date => {
+  const createAt = new Date(date)
+  const interval = new Date().getTime() - createAt.getTime() //现在的时间-传入的时间 = 相差的时间（单位 = 毫秒）
+  if (interval < 0) {
+    return ''
+  } else if (interval / 1000 < 60) {
+    return '刚刚'
+  } else if (interval / 60000 < 60) {
+    return parseInt(interval / 60000) + '分钟前'
+  } else if (interval / 3600000 < 24) {
+    return parseInt(interval / 3600000) + '小时前'
+  } else if (interval / 86400000 < 31) {
+    return parseInt(interval / 86400000) + '天前'
+  } else if (interval / 2592000000 < 12) {
+    return parseInt(interval / 2592000000) + '月前'
+  } else {
+    return parseInt(interval / 31536000000) + '年前'
+  }
+}
