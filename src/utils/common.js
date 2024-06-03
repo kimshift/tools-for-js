@@ -91,7 +91,7 @@ export const isEqual = (a, b) => {
     // 若两个参数都为对象，先判断对象长度是否相同==>遍历对象内元素是否相同
     for (const key in a) {
       if (a.hasOwnProperty(key)) {
-        if (!equalsObj(a[key], b[key])) {
+        if (!isEqual(a[key], b[key])) {
           // 对象中具有不相同属性 返回false
           return false
         }
@@ -100,7 +100,7 @@ export const isEqual = (a, b) => {
   } else if (IsType('Array', a) && IsType('Array', b) && a.length === b.length) {
     // 若两个参数都为数组，则先判断数组长度是否相同==>遍历数组元素是否相同
     for (let i = 0, length = a.length; i < length; i++) {
-      if (!equalsObj(a[i], b[i])) {
+      if (!isEqual(a[i], b[i])) {
         // 如果数组元素中具有不相同元素,返回false
         return false
       }
