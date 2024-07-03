@@ -47,3 +47,4 @@ import { API } from 'tools-for-js'
 | GBK 字符集实际长度计算               | getStrLength      |
 | 密码强度校验                         | checkPwdStrength  |
 | 按指定长度分段字符串                 | splitString       |
+| 将对象转换为查询字符串               | objectToQs        |

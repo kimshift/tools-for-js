@@ -35,3 +35,6 @@ export { IsType, deepCopy, isEmpty, isEqual, createUUID } from './utils/common'
 
 // 字符类
 export { getStrLength, checkPwdStrength, splitString } from './utils/string'
+
+// 对象类
+export { objectToQs } from './utils/object'
