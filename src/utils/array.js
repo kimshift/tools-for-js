@@ -1,5 +1,6 @@
 import { summation } from './calculate'
 import { isEmpty, deepCopy } from './common'
+import { getValByKey } from './object'
 /*******
  * @description: 数组去重
  * @author: 琴时
@@ -207,13 +208,13 @@ export const sortByKeyAndTime = (list, config) => {
   const { key = 'sticky', timeKey = 'date', order = 'asc', timeOrder = 'desc' } = config || {}
   const listCopy = deepCopy(list)
   return listCopy.sort((a, b) => {
-    let a_val = a[key]
-    let a_time = new Date(a[timeKey])
-    let b_val = b[key]
-    let b_time = new Date(b[timeKey])
+    let a_val = getValByKey(a, key)
+    let a_time = new Date(getValByKey(a, timeKey))
+    let b_val = getValByKey(b, key)
+    let b_time = new Date(getValByKey(b, timeKey))
     if (a_val === b_val) {
       return timeOrder === 'desc' ? b_time - a_time : a_time - b_time
     }
-    return order === 'asc' ? a[key] - b[key] : b[key] - a[key]
+    return order === 'asc' ? a_val - b_val : b_val - a_val
   })
 }
