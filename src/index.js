@@ -25,6 +25,8 @@ export {
   arrExchange,
   arrayToTree,
   getValueFromArray,
+  getPagination,
+  sortByKeyAndTime,
 } from './utils/array'
 
 // 计算类
