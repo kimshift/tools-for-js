@@ -49,4 +49,5 @@ import { API } from 'tools-for-js'
 | 按指定长度分段字符串                             | splitString       |
 | 将对象转换为查询字符串                           | objectToQs        |
 | 计算数据分页                                     | getPagination     |
-| 根据[key]值排序，相同时则根据时间[timeKey]值排序 | sortByKeyAndTime  |
+| 根据 key 值排序，相同时则根据时间 timeKey 值排序 | sortByKeyAndTime  |
+| 根据 key 获取对象值                              | getValByKey       |

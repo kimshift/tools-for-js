@@ -154,7 +154,7 @@ export const arrayToTree = (array, config) => {
  * @return {*}
  */
 export const getValueFromArray = (list, labelVal, label = 'label', value = 'value') => {
-  list = JSON.parse(JSON.stringify(list))
+  list = deepCopy(list)
   let res = list.find(item => item[label] == labelVal) || {}
   return res[value]
 }
@@ -191,7 +191,8 @@ export const randomNumEnum = (array, num) => {
  */
 export const getPagination = (list, params) => {
   const { page, pageSize } = params
-  return list.value.slice((page - 1) * pageSize, page * pageSize)
+  list = deepCopy(list)
+  return list.slice((page - 1) * pageSize, page * pageSize)
 }
 
 /*******
@@ -206,12 +207,12 @@ export const getPagination = (list, params) => {
  */
 export const sortByKeyAndTime = (list, config) => {
   const { key = 'sticky', timeKey = 'date', order = 'asc', timeOrder = 'desc' } = config || {}
-  const listCopy = deepCopy(list)
-  return listCopy.sort((a, b) => {
+  list = deepCopy(list)
+  return list.sort((a, b) => {
     let a_val = getValByKey(a, key)
-    let a_time = new Date(getValByKey(a, timeKey))
+    let a_time = +new Date(getValByKey(a, timeKey))
     let b_val = getValByKey(b, key)
-    let b_time = new Date(getValByKey(b, timeKey))
+    let b_time = +new Date(getValByKey(b, timeKey))
     if (a_val === b_val) {
       return timeOrder === 'desc' ? b_time - a_time : a_time - b_time
     }
