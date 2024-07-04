@@ -6,6 +6,8 @@ if git status --porcelain | grep -q '^[ MARC]'; then # 判断仓库是否干净
   git commit -m "publish new version" # 添加版本更新信息
 fi
 
+# 发布命令:npm run release
+
 # 补丁修改---修改小版本
 # npm version patch
 

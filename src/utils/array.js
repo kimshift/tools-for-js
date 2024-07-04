@@ -179,3 +179,41 @@ export const randomNumEnum = (array, num) => {
   }
   return shuffled.slice(min)
 }
+
+/*******
+ * @description: 计算数据分页
+ * @author: 琴时
+ * @param {Array} list
+ * @param {Number}  params.page [当前页码]
+ * @param {Number}  params.pageSize [每页显示条数]
+ * @return {Array}
+ */
+export const getPagination = (list, params) => {
+  const { page, pageSize } = params
+  return list.value.slice((page - 1) * pageSize, page * pageSize)
+}
+
+/*******
+ * @description: 根据[key]值排序，相同时则根据时间[timeKey]值排序
+ * @author: 琴时
+ * @param {*} list
+ * @param {String} config.key  [排序字段]
+ * @param {String} config.timeKey [时间字段]
+ * @param {String} config.order [排序方式，默认升序]
+ * @param {String} config.timeOrder [时间排序方式，默认降序]
+ * @return {Array}
+ */
+export const sortByKeyAndTime = (list, config) => {
+  const { key = 'sticky', timeKey = 'date', order = 'asc', timeOrder = 'desc' } = config || {}
+  const listCopy = deepCopy(list)
+  return listCopy.sort((a, b) => {
+    let a_val = a[key]
+    let a_time = new Date(a[timeKey])
+    let b_val = b[key]
+    let b_time = new Date(b[timeKey])
+    if (a_val === b_val) {
+      return timeOrder === 'desc' ? b_time - a_time : a_time - b_time
+    }
+    return order === 'asc' ? a[key] - b[key] : b[key] - a[key]
+  })
+}
