@@ -136,10 +136,23 @@ export const countDown = (params, sign = 'cn') => {
  * @description: 距离当前时间状况
  * @author: 琴时
  * @param {*} date
+ * @param {String} diff [year:年, month:月, week:周, day:天, hour:小时, minute:分钟, second:秒]
  * @return {String}
  */
-export const transformDate = date => {
-  let diff = dayjs(date).fromNow().replace(/\s+/g, '')
-  if (diff === '几秒前') diff = '刚刚'
-  return diff
+export const transformDate = (date, diff) => {
+  let transDay = dayjs(date).fromNow().replace(/\s+/g, '')
+  if (transDay === '几秒前') transDay = '刚刚'
+  if (diff) {
+    const diffObj = {
+      year: '年',
+      month: '月',
+      week: '周',
+      day: '天',
+    }
+    // 匹配transDay有无该值==>超出界限则显示日期
+    if (new RegExp(`(${diffObj[diff]})`).test(transDay)) {
+      transDay = dayjs(date).format('YYYY-MM-DD')
+    }
+  }
+  return transDay
 }
