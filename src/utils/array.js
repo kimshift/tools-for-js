@@ -219,3 +219,18 @@ export const sortByKeyAndTime = (list, config) => {
     return order === 'asc' ? a_val - b_val : b_val - a_val
   })
 }
+
+/*******
+ * @description: 数组随机打乱
+ * @author: 琴时
+ * @param {Array} arr
+ * @return {Array}
+ */
+export function shuffleArray(arr) {
+  const array = [...arr]
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}

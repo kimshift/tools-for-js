@@ -51,3 +51,4 @@ import { API } from 'tools-for-js'
 | 计算数据分页                                     | getPagination     |
 | 根据 key 值排序，相同时则根据时间 timeKey 值排序 | sortByKeyAndTime  |
 | 根据 key 获取对象值                              | getValByKey       |
+| 数组随机打乱                                     | shuffleArray      |
