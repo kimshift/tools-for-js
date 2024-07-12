@@ -31,5 +31,8 @@
     "@babel/node": "^7.23.9",
     "@babel/preset-env": "^7.24.5",
     "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.11"
   }
 }

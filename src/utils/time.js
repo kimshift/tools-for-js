@@ -1,81 +1,53 @@
+import 'dayjs/locale/zh-cn' // ES 2015
+import relativeTime from 'dayjs/plugin/relativeTime'
+import dayjs from 'dayjs'
+dayjs.locale('zh-cn') // 全局使用
+dayjs.extend(relativeTime)
+
 /*******
  * @description: 生成时间格式化
  * @author: 琴时
- * @param {params} 需要格式化的时间串（''/null/undefined ==> 默认当前时间）
- * @param {format} 格式化样式标识（年-月-日：YYYY-MM-DD）(不传默认返回年-月-日 时:分:秒)
+ * @param {date} 需要格式化的时间串（''/null/undefined ==> 默认当前时间）
+ * @param {fmt} 格式化样式标识（年-月-日：YYYY-MM-DD）(不传默认返回年-月-日 时:分:秒)
  * @return {*} 返回格式化后的时间字符串
  */
-export const dateFormat = (params, format = 'YYYY-MM-DD hh:mm:ss') => {
-  //如果params是时间字符串：2021-05-20 00:00:00 为了兼容ios需要将其转换成 2021/05/20 00:00:00
+export const dateFormat = (date, fmt = 'YYYY-MM-DD HH:mm:ss') => {
   const pattern = /^(?=.*T)(?=.*).*$/
   const patternNum = /^\d*$/
-  if (!params) {
-    params = new Date()
-  } else if (patternNum.test(params)) {
-    params = parseInt(params)
-  } else if (typeof params === 'string' && !pattern.test(params)) {
-    params = `${params}`.replace(/-/g, '/')
+  if (!date) {
+    // 不传参数
+    date = new Date()
+  } else if (patternNum.test(date)) {
+    // 时间戳
+    date = parseInt(date)
+  } else if (typeof date === 'string' && !pattern.test(date)) {
+    //兼容ios: 将时间字符串中的'-'替换成'/' 2021-05-20 00:00:00=>2021/05/20 00:00:00
+    date = `${date}`.replace(/-/g, '/')
   }
   /* 处理格式化时间 */
-  const dt = new Date(params) //创建时间对象
-  const yy = dt.getFullYear() //年
-  const qt = Math.floor((dt.getMonth() + 3) / 3) //季度
-  const mm = (dt.getMonth() + 1 + '').padStart(2, '0') //月(padStart:字符串不满2位数,开头补全'0')
-  const dd = (dt.getDate() + '').padStart(2, '0') //日
-  const wk = '星期' + '日一二三四五六'.charAt(dt.getDay()) //星期
-  const hh = (dt.getHours() + '').padStart(2, '0') //时
-  const mi = (dt.getMinutes() + '').padStart(2, '0') //分
-  const ss = (dt.getSeconds() + '').padStart(2, '0') //秒
-  const ms = dt.getMilliseconds() //毫秒
-  const timeObj = {
-    date1: `${yy}-${mm}-${dd} ${hh}:${mi}:${ss} ${qt}${wk}`, //年-月-日 时:分:秒 季度星期
-    date2: `${yy}-${mm}-${dd} ${hh}:${mi}:${ss} ${qt}`, //年-月-日 时:分:秒 季度
-    date3: `${yy}-${mm}-${dd} ${hh}:${mi}:${ss} ${wk}`, //年-月-日 时:分:秒 星期
-    date4: `${yy}-${mm}-${dd} ${hh}:${mi}:${ss}`, //年-月-日 时:分:秒
-    date5: `${yy}-${mm}-${dd}`, //年-月-日
-    date6: `${yy}-${mm}`, //年-月
-    date7: `${mm}-${dd}`, //月-日
-    date8: `${hh}:${mi}:${ss}`, //时:分:秒
-    date9: `${yy}`, //年
-    date10: `${mm}`, //月
-    date11: `${dd}`, //日
-    date12: `${hh}`, //时
-    date13: `${mm}`, //分
-    date14: `${ss}`, //秒
-    date15: `${qt}`, //季度
-    date16: `${wk}`, //星期
-    date17: `${yy}${mm}${dd}${hh}${mi}${ss}`, //时间串
+  const dt = new Date(date) //创建时间对象
+  // 构造正则匹配:(value)padStart:字符串不满2位数,开头补全'0'
+  const o = {
+    '[Yy]+': dt.getFullYear(), //年
+    'M+': (dt.getMonth() + 1 + '').padStart(2, '0'), //月
+    'D+': (dt.getDate() + '').padStart(2, '0'), // 日
+    'H+': (dt.getHours() + '').padStart(2, '0'), // 时
+    'm+': (dt.getMinutes() + '').padStart(2, '0'), // 分
+    's+': (dt.getSeconds() + '').padStart(2, '0'), // 秒
+    'w+': '星期' + '日一二三四五六'.charAt(dt.getDay()), // 星期
+    'q+': Math.floor((dt.getMonth() + 3) / 3), // 季度
+    S: dt.getMilliseconds(), // 毫秒
   }
-  /* 检测时间格式的标识 */
-  const list = [
-    /^YYYY\-MM\-DD hh\:mm\:ss qtwk$/, //年-月-日 时:分:秒 季度星期
-    /^YYYY\-MM\-DD hh\:mm\:ss qt$/, //年-月-日 时:分:秒 季度
-    /^YYYY\-MM\-DD hh\:mm\:ss wk$/, //年-月-日 时:分:秒 星期
-    /^YYYY\-MM\-DD hh\:mm\:ss$/, //年-月-日 时:分:秒
-    /^YYYY\-MM\-DD$/, //年-月-日
-    /^YYYY\-MM$/, //年-月
-    /^MM\-DD$/, //月-日
-    /^hh\:mm\:ss$/, //时:分:秒
-    /^YYYY$/, //年
-    /^MM$/, //月
-    /^DD$/, //日
-    /^hh$/, //时
-    /^mm$/, //分
-    /^ss$/, //秒
-    /^qt$/, //季度
-    /^ss$/, //星期
-    /^YYYYMMDDhhmmss$/, //时间串
-  ]
-  let newDate = ''
-  const news = list.some((item, index) => {
-    if (item.test(format)) {
-      newDate = timeObj[`date${index + 1}`]
-      return true
+  // 将正则匹配上的字符替换对应的时间值
+  for (const k in o) {
+    if (new RegExp(`(${k})`).test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, o[k])
     }
-    return false
-  })
-  if (!news) newDate = `${yy}-${mm}-${dd} ${hh}:${mi}:${ss}` //如果传过来的格式化标识符异常则默认返回:年-月-日 时:分:秒
-  return newDate
+  }
+  return fmt
+}
+export const formatDate = (date, fmt = 'YYYY-MM-DD HH:mm:ss') => {
+  return dayjs(date).format(fmt)
 }
 
 /*******
@@ -167,21 +139,7 @@ export const countDown = (params, sign = 'cn') => {
  * @return {String}
  */
 export const transformDate = date => {
-  const createAt = new Date(date)
-  const interval = new Date().getTime() - createAt.getTime() //现在的时间-传入的时间 = 相差的时间（单位 = 毫秒）
-  if (interval < 0) {
-    return ''
-  } else if (interval / 1000 < 60) {
-    return '刚刚'
-  } else if (interval / 60000 < 60) {
-    return parseInt(interval / 60000) + '分钟前'
-  } else if (interval / 3600000 < 24) {
-    return parseInt(interval / 3600000) + '小时前'
-  } else if (interval / 86400000 < 31) {
-    return parseInt(interval / 86400000) + '天前'
-  } else if (interval / 2592000000 < 12) {
-    return parseInt(interval / 2592000000) + '月前'
-  } else {
-    return parseInt(interval / 31536000000) + '年前'
-  }
+  let diff = dayjs(date).fromNow().replace(/\s+/g, '')
+  if (diff === '几秒前') diff = '刚刚'
+  return diff
 }

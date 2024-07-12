@@ -14,7 +14,14 @@ export {
 } from './utils/transform'
 
 // 时间类
-export { timeStamp, countDown, dateFormat, getTimeDistance, transformDate } from './utils/time'
+export {
+  timeStamp,
+  countDown,
+  dateFormat,
+  formatDate,
+  getTimeDistance,
+  transformDate,
+} from './utils/time'
 
 // 数组类
 export {
@@ -27,6 +34,7 @@ export {
   getValueFromArray,
   getPagination,
   sortByKeyAndTime,
+  shuffleArray,
 } from './utils/array'
 
 // 计算类
