@@ -2,7 +2,6 @@ import 'dayjs/locale/zh-cn' // ES 2015
 import relativeTime from 'dayjs/plugin/relativeTime'
 import dayjs from 'dayjs'
 dayjs.locale('zh-cn') // 全局使用
-dayjs.extend(relativeTime)
 
 /*******
  * @description: 生成时间格式化
@@ -140,6 +139,7 @@ export const countDown = (params, sign = 'cn') => {
  * @return {String}
  */
 export const transformDate = (date, diff) => {
+  dayjs.extend(relativeTime)
   let transDay = dayjs(date).fromNow().replace(/\s+/g, '')
   if (transDay === '几秒前') transDay = '刚刚'
   if (diff) {

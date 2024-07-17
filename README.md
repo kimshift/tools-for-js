@@ -52,3 +52,4 @@ import { API } from 'tools-for-js'
 | 根据 key 值排序，相同时则根据时间 timeKey 值排序 | sortByKeyAndTime  |
 | 根据 key 获取对象值                              | getValByKey       |
 | 数组随机打乱                                     | shuffleArray      |
+| 将路径中的反斜杠字符 \ 替换为斜杠 /              | replacePath       |

@@ -184,3 +184,13 @@ export function splitString(str, num) {
   }
   return array
 }
+
+/*******
+ * @description: 将路径中的反斜杠字符 \ 替换为斜杠 /
+ * @author: 琴时
+ * @param {*} path
+ * @return {*}
+ */
+export function replacePath(path) {
+  return path.replace(/\\/g, '/')
+}
