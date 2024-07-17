@@ -194,3 +194,16 @@ export function splitString(str, num) {
 export function replacePath(path) {
   return path.replace(/\\/g, '/')
 }
+
+/*******
+ * @description: 切割/获取文件名
+ * @author: 琴时
+ * @param {*} path
+ * @return {*}
+ */
+export function splitToFileName(path) {
+  path = replacePath(path || '')
+  const lastIndex = path.lastIndexOf('/')
+  if (lastIndex === -1) return path
+  return path.substring(lastIndex + 1)
+}

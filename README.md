@@ -53,3 +53,4 @@ import { API } from 'tools-for-js'
 | 根据 key 获取对象值                              | getValByKey       |
 | 数组随机打乱                                     | shuffleArray      |
 | 将路径中的反斜杠字符 \ 替换为斜杠 /              | replacePath       |
+| 切割/获取文件名                                  | splitToFileName   |
