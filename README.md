@@ -54,3 +54,4 @@ import { API } from 'tools-for-js'
 | 数组随机打乱                                     | shuffleArray      |
 | 将路径中的反斜杠字符 \ 替换为斜杠 /              | replacePath       |
 | 切割/获取文件名                                  | splitToFileName   |
+| 数组反转                                | invertSelection   |

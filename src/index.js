@@ -35,6 +35,7 @@ export {
   getPagination,
   sortByKeyAndTime,
   shuffleArray,
+  invertSelection,
 } from './utils/array'
 
 // 计算类

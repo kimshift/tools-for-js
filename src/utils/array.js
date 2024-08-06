@@ -19,7 +19,7 @@ export const deWeightArray = (list, key, callback) => {
   const tempList = [] //重复数据
   const map = new Map() //创建Map对象数据结构
   // 遍历需要去重的数组对象
-  list.forEach(item => {
+  list.forEach((item) => {
     // 判断map对象中该key是否已经存在
     if (!map.has(item[key])) {
       map.set(item[key], item) //如果不存在，将该数据插入
@@ -46,7 +46,7 @@ export const treeLastChildSum = (tree, config) => {
   const { key = 'id', children = 'children' } = config || {}
   const sumList = [] //缓存目标节点值
   const traverseTree = (tree, list, key, children) => {
-    tree.forEach(item => {
+    tree.forEach((item) => {
       if (item[children] && item[children].length > 0) {
         traverseTree(item[children], list, key, children)
       } else if (item[key]) {
@@ -69,7 +69,7 @@ export const treeLastChildSum = (tree, config) => {
 export const checkKeyEmpty = (list, keyList) => {
   const temp = []
   const loops = (array, key) => {
-    array.some(item => {
+    array.some((item) => {
       if (isEmpty(item[key])) {
         // 存在空的字段
         temp.push(key)
@@ -79,7 +79,7 @@ export const checkKeyEmpty = (list, keyList) => {
       }
     })
   }
-  keyList.forEach(key => {
+  keyList.forEach((key) => {
     loops(list, key)
   })
   return temp
@@ -134,7 +134,7 @@ export const arrayToTree = (array, config) => {
     hash[data[index][id]] = data[index]
   })
 
-  data.forEach(item => {
+  data.forEach((item) => {
     let hashVP = hash[item[pid]]
     if (hashVP) {
       !hashVP[children] && (hashVP[children] = [])
@@ -155,7 +155,7 @@ export const arrayToTree = (array, config) => {
  */
 export const getValueFromArray = (list, labelVal, label = 'label', value = 'value') => {
   list = deepCopy(list)
-  let res = list.find(item => item[label] == labelVal) || {}
+  let res = list.find((item) => item[label] == labelVal) || {}
   return res[value]
 }
 
@@ -233,4 +233,16 @@ export function shuffleArray(arr) {
     ;[array[i], array[j]] = [array[j], array[i]]
   }
   return array
+}
+
+/*******
+ * @description: 数组反转
+ * @author: 琴时
+ * @param {Array} list
+ * @param {*} elem
+ * @param {*} key
+ * @return {Array}
+ */
+export function invertSelection(list, elem, key = 'all') {
+  return list.filter((item) => (item === key) === (elem === key))
 }
