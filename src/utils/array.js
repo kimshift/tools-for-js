@@ -236,13 +236,24 @@ export function shuffleArray(arr) {
 }
 
 /*******
- * @description: 数组反转
+ * @description: 数组反选: 选中元素与未选中元素反转
  * @author: 琴时
  * @param {Array} list
- * @param {*} elem
- * @param {*} key
+ * @param {*} elem [选中的元素]
+ * @param {*} key  [反转目标元素]
  * @return {Array}
+ * @example
+ * invertSelection([1, 2], 'all', 'all') => ['all']
+ * invertSelection(['all'], 1, 'all') => [1]
+ * invertSelection([1, 2, 3], 3, 'all') => [1, 2]
+ * invertSelection([1, 2], 3, 'all') => [1, 2, 3]
  */
 export function invertSelection(list, elem, key = 'all') {
+  if (list.includes(elem)) {
+    list = list.filter((item) => item !== elem)
+  } else {
+    list.push(elem)
+  }
+  // element = key时，直接返回[key];否则，将key从list中删除
   return list.filter((item) => (item === key) === (elem === key))
 }
